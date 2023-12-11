@@ -51,8 +51,12 @@ class Player {
   update() {
     this.draw();
     this.position.y = this.position.y + this.velocity.y;
-    if (this.position.y + this.heigth === HEIGHT) {
+    this.position.x = this.position.x + this.velocity.x;
+    if (this.position.y + this.heigth >= HEIGHT) {
       this.velocity.y = 0;
+    }
+    if (this.position.x + this.width >= WIDTH || this.position.x <= 0) {
+      this.velocity.x = 0;
     }
   }
 }
@@ -90,3 +94,22 @@ const animate = () => {
 };
 
 animate();
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "w") {
+    player1.position.y = 50;
+    player1.velocity.y = 5;
+  }
+  if (event.key === "d") {
+    player1.velocity.x = 2;
+  }
+
+  if (event.key === "a") {
+    player1.velocity.x = -2;
+  }
+
+  if (event.key === "ArrowUp") {
+    player2.position.y = 50;
+    player2.velocity.y = 3;
+  }
+});
